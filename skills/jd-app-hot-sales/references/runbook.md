@@ -11,7 +11,7 @@ adb devices -l
 .venv/Scripts/python.exe <skill>/scripts/prepare_input.py <source.xlsx> --sheet 未提报SKU --header-row 7 --output runtime/input.json
 ```
 
-JSON可用 `{"records":[{"sku":"123456789012","商品名称":"示例名称"}]}`；CSV列名 `sku,商品名称`。支持SKU列名sku、SKU、SKU编号，名称列title、商品名称。`exclude_reason`仅用于用户明确确认的排除。按SKU去重，冲突标题或排除原因拒绝；同名的不同SKU全部保留。
+JSON可用 `{"records":[{"sku":"123456789012","商品名称":"示例名称"}]}`；CSV列名 `sku,商品名称`。支持SKU列名sku、SKU、SKU编码、SKU编号，名称列title、商品名称。`exclude_reason`仅用于用户明确确认的排除。按SKU去重，冲突标题或排除原因拒绝；同名的不同SKU全部保留。
 
 ## 京东16安卓入口
 

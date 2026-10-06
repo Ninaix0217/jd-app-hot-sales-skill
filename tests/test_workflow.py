@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from datetime import datetime
 
 SCRIPTS = Path(__file__).resolve().parents[1] / 'skills/jd-app-hot-sales/scripts'
 sys.path.insert(0, str(SCRIPTS))
@@ -40,6 +41,8 @@ class WorkflowTests(unittest.TestCase):
     def test_input_deduplication_and_conflict(self):
         self.assertEqual(normalize([{'SKU编号':'111','商品名称':'A'}])[0]['sku'],'111')
         self.assertEqual(normalize([{'SKU编码':'111','商品名称':'A'}])[0]['sku'],'111')
+        r=normalize([{'sku':'111','title':'A','source_time':datetime(2026,1,1)}])[0]
+        self.assertEqual(r['source_time'],'2026-01-01T00:00:00')
         self.assertEqual(len(normalize([{'sku': '111','title':'A'}, {'sku':'111','title':'A'}])),1)
         with self.assertRaises(ValueError):
             normalize([{'sku':'111','title':'A'}, {'sku':'111','title':'B'}])

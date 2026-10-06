@@ -1,6 +1,7 @@
 """Read one explicit sheet/table. Preserve names, deduplicate SKU identifiers."""
 import argparse
 import csv
+from datetime import date, time
 import json
 from pathlib import Path
 import re
@@ -24,6 +25,7 @@ def normalize(rows):
                 raise ValueError('Conflicting records for SKU ' + sku)
             continue
         record = {**row, 'sku': sku, '商品名称': title}
+        record = {k: v.isoformat() if isinstance(v, (date, time)) else v for k, v in record.items()}
         seen[sku] = record
         records.append(record)
     if not records:

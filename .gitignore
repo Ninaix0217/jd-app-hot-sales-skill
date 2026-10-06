@@ -1,0 +1,13 @@
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+runtime/
+*.xlsx
+*.apk
+*.png
+*.xml
+*.jsonl
+.env
+.env.*
+*.log

@@ -1,0 +1,1 @@
+-r skills/jd-app-hot-sales/scripts/requirements.txt

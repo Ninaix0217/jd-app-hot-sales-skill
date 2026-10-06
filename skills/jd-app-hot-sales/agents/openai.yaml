@@ -1,0 +1,4 @@
+interface:
+  display_name: "京东全网热销筛选"
+  short_description: "通过安卓京东App逐条核对SKU，采集全网热销档位并筛选，保留未知和断点"
+  default_prompt: "使用 $jd-app-hot-sales 处理我提供的SKU，按确认的全网热销档位筛选并导出结果。"

@@ -38,6 +38,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertIs(r['hit'], False)
 
     def test_input_deduplication_and_conflict(self):
+        self.assertEqual(normalize([{'SKU编号':'111','商品名称':'A'}])[0]['sku'],'111')
         self.assertEqual(len(normalize([{'sku': '111','title':'A'}, {'sku':'111','title':'A'}])),1)
         with self.assertRaises(ValueError):
             normalize([{'sku':'111','title':'A'}, {'sku':'111','title':'B'}])

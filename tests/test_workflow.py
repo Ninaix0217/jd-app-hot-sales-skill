@@ -77,7 +77,7 @@ class WorkflowTests(unittest.TestCase):
             state=json.loads((td/'run/run-status.json').read_text(encoding='utf-8'))
             self.assertEqual(state['status'],'ALL_INPUTS_PROCESSED')
             self.assertEqual(state['hits'],0)
-            self.assertEqual(state['unresolved'],403)
+            self.assertEqual(state['unresolved'],2)
 
 
 if __name__ == '__main__':

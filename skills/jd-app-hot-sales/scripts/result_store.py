@@ -19,7 +19,7 @@ def classified(row):
                    status='未显示全网热销' if not row.get('raw_metric') else
                    ('热销字段需核验' if parsed is None else parsed['status']))
     else:
-        row.update(parsed=None, hit=None, raw_metric=None)
+        row.update(parsed=None, hit=False if row.get('status') == '用户确认排除' else None, raw_metric=None)
     return row
 
 

@@ -1,12 +1,10 @@
 """JD 16 visible UI collector. Run one phone worker at a time; never automate authentication."""
 import argparse
 from collections import Counter
-import hashlib
 from datetime import datetime
 import json
 from pathlib import Path
 import re
-import sys
 import time
 import unicodedata
 import xml.etree.ElementTree as ET
@@ -15,10 +13,6 @@ from sales_parser import parse_display
 
 
 PKG = 'com.jingdong.app.mall'
-TITLE = 'com.jd.lib.productdetail.feature:id/d_'
-METRIC = 'com.jd.lib.productdetail.feature:id/anj'
-FIELD = 'com.jd.lib.search.feature:id/abj'
-SEARCH = 'com.jd.lib.search.feature:id/aac'
 
 
 class HumanRequired(RuntimeError):
@@ -229,7 +223,8 @@ def save_json(path, value):
 
 def unknown(record, status, reason):
     return {'sku': record['sku'], 'expected_title': record['商品名称'],
-            'observed_title': None, 'raw_metric': None, 'parsed': None, 'hit': None,
+            'observed_title': None, 'raw_metric': None, 'parsed': None,
+            'hit': False if status == '用户确认排除' else None,
             'identity_verified': False, 'status': status, 'reason': reason,
             'collected_at': datetime.now().astimezone().isoformat(),
             'source_sheet': record.get('source_sheet'), 'source_excel_row': record.get('source_excel_row')}

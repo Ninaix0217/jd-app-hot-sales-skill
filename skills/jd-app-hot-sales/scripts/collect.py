@@ -10,6 +10,8 @@ import sys
 import time
 import unicodedata
 import xml.etree.ElementTree as ET
+import uiautomator2 as u2
+from sales_parser import parse_display
 
 
 PKG = 'com.jingdong.app.mall'

@@ -6,6 +6,7 @@ import unittest
 SCRIPTS=Path(__file__).resolve().parents[1]/'skills/jd-app-hot-sales/scripts'
 sys.path.insert(0,str(SCRIPTS))
 from collect import Collector, HumanRequired
+import collect
 
 
 class FakeDevice:
@@ -31,6 +32,10 @@ def xml(text, rid=''):
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_runtime_symbols_available(self):
+        self.assertTrue(callable(collect.u2.connect))
+        self.assertIs(collect.parse_display('全网热销100万+')['hit'], True)
+
     def collector(self, td, device):
         c=Collector.__new__(Collector)
         c.d=device

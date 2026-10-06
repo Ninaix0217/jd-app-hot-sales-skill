@@ -119,11 +119,18 @@ class JD16Collector(Collector):
             time.sleep(.7)
         field = None
         deadline = time.monotonic() + 5
+        opened_home_search = False
         while time.monotonic() < deadline:
             nodes = self.capture(f'{sku}-search.xml')
             field = self.field(nodes)
             if field is not None:
                 break
+            home = self.find(nodes, 'com.jingdong.app.mall:id/b6o')
+            if home is not None and not opened_home_search:
+                self.tap(home)
+                opened_home_search = True
+                time.sleep(.7)
+                continue
             time.sleep(.3)
         if field is None:
             raise RuntimeError('JD 16 full-site input is not ready; do not use seconds-delivery search')

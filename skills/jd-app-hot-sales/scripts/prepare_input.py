@@ -10,7 +10,7 @@ def normalize(rows):
     records = []
     seen = {}
     for row in rows:
-        raw = row.get('sku', row.get('SKU', row.get('SKU编号')))
+        raw = row.get('sku', row.get('SKU', row.get('SKU编码', row.get('SKU编号'))))
         if raw is None or str(raw).strip() == '':
             continue
         if isinstance(raw, float):
@@ -48,8 +48,8 @@ def read_source(path, sheet=None, header_row=1):
             ws = wb[sheet]
             values = list(ws.iter_rows(min_row=header_row, values_only=True))
             headers = [str(x).strip() if x is not None else '' for x in values[0]]
-            if not any(h in ('sku', 'SKU', 'SKU编号') for h in headers) or not any(h in ('title', '商品名称') for h in headers):
-                raise ValueError('Header requires SKU/sku/SKU编号 and 商品名称/title columns')
+            if not any(h in ('sku', 'SKU', 'SKU编码', 'SKU编号') for h in headers) or not any(h in ('title', '商品名称') for h in headers):
+                raise ValueError('Header requires SKU/sku/SKU编码/SKU编号 and 商品名称/title columns')
             rows = [{**dict(zip(headers, v)), 'source_sheet': sheet,
                      'source_excel_row': n} for n, v in enumerate(values[1:], header_row + 1)]
         finally:
